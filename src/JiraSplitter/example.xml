@@ -1,0 +1,250 @@
+﻿<item>
+	<title>[NDM-562] Pagination Issue with Conversation History</title>
+	<link>https://eliassenps.atlassian.net/browse/NDM-562</link>
+	<project id="11674" key="NDM">Nucleus Demo Modules</project>
+	<description>
+		&lt;div class=&quot;panel&quot; style=&quot;background-color: #ffebe6;border-width: 1px;&quot;&gt;&lt;div class=&quot;panelContent&quot; style=&quot;background-color: #ffebe6;&quot;&gt;
+		&lt;p&gt;&lt;b&gt;ACTUAL RESULTS&lt;/b&gt;&lt;/p&gt;
+
+		&lt;p&gt;When you try to create a new conversation and swap to a different page, the wrong results are returned and you do not get back all of the workflows/prompts.&lt;/p&gt;
+		&lt;/div&gt;&lt;/div&gt;
+
+		&lt;div class=&quot;panel&quot; style=&quot;background-color: #e3fcef;border-width: 1px;&quot;&gt;&lt;div class=&quot;panelContent&quot; style=&quot;background-color: #e3fcef;&quot;&gt;
+		&lt;p&gt;&lt;b&gt;EXPECTED RESULTS&lt;/b&gt;&lt;/p&gt;
+
+		&lt;p&gt;Swapping to a different page should return the correct results and you should see all of the workflows/prompts.&lt;/p&gt;
+		&lt;/div&gt;&lt;/div&gt;
+
+		&lt;div class=&quot;panel&quot; style=&quot;background-color: #deebff;border-width: 1px;&quot;&gt;&lt;div class=&quot;panelContent&quot; style=&quot;background-color: #deebff;&quot;&gt;
+		&lt;p&gt;&lt;b&gt;STEPS TO REPRODUCE&lt;/b&gt;&lt;/p&gt;
+
+
+		&lt;p&gt;&lt;div class=&quot;embeddedObject&quot;&gt;&lt;object classid=&quot;clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B&quot; codebase=&quot;https://www.apple.com/qtactivex/qtplugin.cab&quot; data=&quot;/rest/api/3/attachment/content/118217?stream=true&quot; height=&quot;720&quot; type=&quot;video/mp4&quot; width=&quot;1280&quot; &gt;&lt;param name=&quot;data&quot; value=&quot;/rest/api/3/attachment/content/118217?stream=true&quot;/&gt;&lt;param name=&quot;src&quot; value=&quot;/rest/api/3/attachment/content/118217?stream=true&quot;/&gt;&lt;param name=&quot;type&quot; value=&quot;video/mp4&quot;/&gt;&lt;embed height=&quot;720&quot; pluginspage=&quot;https://www.apple.com/quicktime/download/&quot; src=&quot;/rest/api/3/attachment/content/118217?stream=true&quot; type=&quot;video/mp4&quot; width=&quot;1280&quot; /&gt;&lt;/object&gt;&lt;/div&gt;&lt;/p&gt;
+		&lt;/div&gt;&lt;/div&gt;
+
+		&lt;div class=&quot;panel&quot; style=&quot;background-color: #fffae6;border-width: 1px;&quot;&gt;&lt;div class=&quot;panelContent&quot; style=&quot;background-color: #fffae6;&quot;&gt;
+		&lt;p&gt;&lt;b&gt;TECH NOTES&lt;/b&gt;&lt;/p&gt;
+
+		&lt;p&gt;Updated&lt;/p&gt;
+
+		&lt;p&gt;&lt;b&gt;Containers&lt;/b&gt;&lt;/p&gt;
+
+		&lt;ul&gt;
+		&lt;li&gt;ai-engage.container
+		&lt;ul&gt;
+		&lt;li&gt;now passes boolean to &lt;tt&gt;startNewConversation&lt;/tt&gt; method.&lt;/li&gt;
+		&lt;li&gt;if true prompts/workflows are loaded.&lt;/li&gt;
+		&lt;li&gt;if false prompt/workflow conversations are loaded.&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;/li&gt;
+		&lt;/ul&gt;
+
+
+		&lt;p&gt;&lt;b&gt;Components&lt;/b&gt;&lt;/p&gt;
+
+		&lt;ul&gt;
+		&lt;li&gt;prompt-selection.component.ts&lt;/li&gt;
+		&lt;li&gt;workflow-selection.component.ts
+		&lt;ul&gt;
+		&lt;li&gt;Checks if previous page &amp;gt; 0 and current page == 0.
+		&lt;ul&gt;
+		&lt;li&gt;If true then reset first to 0 which will load page 1 of the result data.&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;/li&gt;
+		&lt;li&gt;search.component.html
+		&lt;ul&gt;
+		&lt;li&gt;Added a &#8216;My Conversations&#8217; button as currently once you click new conversation the only way to get back to your current conversations is to reload the entire page.&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;/li&gt;
+		&lt;/ul&gt;
+
+
+		&lt;p&gt;&lt;b&gt;Facades&lt;/b&gt;&lt;/p&gt;
+
+		&lt;ul&gt;
+		&lt;li&gt;ai-engage.facade.ts
+		&lt;ul&gt;
+		&lt;li&gt;Added &lt;tt&gt;getconversationHistoryExistsValue&lt;/tt&gt; method.&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;/li&gt;
+		&lt;/ul&gt;
+
+
+		&lt;p&gt;&lt;b&gt;Services&lt;/b&gt;&lt;/p&gt;
+
+		&lt;ul&gt;
+		&lt;li&gt;ai-engage.service.ts
+		&lt;ul&gt;
+		&lt;li&gt;Added &lt;tt&gt;getconversationHistoryExistsValue&lt;/tt&gt; method.&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;/li&gt;
+		&lt;/ul&gt;
+
+
+		&lt;p&gt;&lt;b&gt;Other&lt;/b&gt;&lt;/p&gt;
+
+		&lt;ul&gt;
+		&lt;li&gt;Added translations.&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;/div&gt;&lt;/div&gt;
+	</description>
+	<environment></environment>
+	<key id="78945">NDM-562</key>
+	<summary>Pagination Issue with Conversation History</summary>
+	<type id="1" iconUrl="https://eliassenps.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium">Bug</type>
+	<priority id="4" iconUrl="https://eliassenps.atlassian.net/images/icons/priorities/minor.svg">Minor</priority>
+	<status id="11237" iconUrl="https://eliassenps.atlassian.net/images/icons/statuses/generic.png" description="">Ready for Acceptance</status>
+	<statusCategory id="4" key="indeterminate" colorName="yellow"/>
+	<resolution id="-1">Unresolved</resolution>
+	<assignee accountid="557058:01c70a83-f402-4aa5-9c43-7f9fbf33e461">David Kane</assignee>
+	<reporter accountid="62fbd784eec8d4a478d419e3">Kris Nicholl</reporter>
+	<labels>
+	</labels>
+	<created>Wed, 29 May 2024 04:29:48 -0400</created>
+	<updated>Fri, 7 Jun 2024 09:41:32 -0400</updated>
+	<due></due>
+	<votes>0</votes>
+	<watches>4</watches>
+	<comments>
+		<comment id="160411" author="620d1a1ef97d180071744d74" created="Thu, 6 Jun 2024 06:26:09 -0400"  >&lt;p&gt;Branch created: &lt;a href=&quot;https://dev.azure.com/lightwellinc-clouddev/Nucleus-Prompt-Engine/_git/Nucleus.Prompt.Engine.NG.Core?version=GBNDM-562-PaginationIssueConversationHistory&quot; class=&quot;external-link&quot; rel=&quot;nofollow noreferrer&quot;&gt;NDM-562-PaginationIssueConversationHistory&lt;/a&gt;&lt;/p&gt;</comment>
+		<comment id="160412" author="620d1a1ef97d180071744d74" created="Thu, 6 Jun 2024 06:47:12 -0400"  >
+			&lt;p&gt;&lt;ins&gt;&lt;b&gt;Testing/Evidence&lt;/b&gt;&lt;/ins&gt;&lt;/p&gt;
+
+			&lt;p&gt;&lt;a href=&quot;https://www.awesomescreenshot.com/video/28386677?key=020464c651f940eee6dd55c48b0f9ecf&quot; class=&quot;external-link&quot; rel=&quot;nofollow noreferrer&quot;&gt;https://www.awesomescreenshot.com/video/28386677?key=020464c651f940eee6dd55c48b0f9ecf&lt;/a&gt;&lt;/p&gt;
+		</comment>
+		<comment id="160425" author="5f9c21e371ab9e006af5b509" created="Thu, 6 Jun 2024 09:49:15 -0400"  >&lt;p&gt;&lt;a href=&quot;https://eliassenps.atlassian.net/secure/ViewProfile.jspa?accountId=620d1a1ef97d180071744d74&quot; class=&quot;user-hover&quot; rel=&quot;620d1a1ef97d180071744d74&quot; data-account-id=&quot;620d1a1ef97d180071744d74&quot; accountid=&quot;620d1a1ef97d180071744d74&quot; rel=&quot;noreferrer&quot;&gt;David McFeely&lt;/a&gt; pr approved.&lt;/p&gt;</comment>
+		<comment id="160459" author="557058:c1a15459-8990-4232-8d64-882b893eddea" created="Fri, 7 Jun 2024 09:41:28 -0400"  >
+
+			&lt;p&gt;&lt;div class=&quot;embeddedObject&quot;&gt;&lt;object classid=&quot;clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B&quot; codebase=&quot;https://www.apple.com/qtactivex/qtplugin.cab&quot; data=&quot;/rest/api/3/attachment/content/118557?stream=true&quot; height=&quot;380&quot; type=&quot;video/mp4&quot; width=&quot;75%&quot; &gt;&lt;param name=&quot;data&quot; value=&quot;/rest/api/3/attachment/content/118557?stream=true&quot;/&gt;&lt;param name=&quot;src&quot; value=&quot;/rest/api/3/attachment/content/118557?stream=true&quot;/&gt;&lt;param name=&quot;type&quot; value=&quot;video/mp4&quot;/&gt;&lt;embed height=&quot;380&quot; pluginspage=&quot;https://www.apple.com/quicktime/download/&quot; src=&quot;/rest/api/3/attachment/content/118557?stream=true&quot; type=&quot;video/mp4&quot; width=&quot;75%&quot; /&gt;&lt;/object&gt;&lt;/div&gt;&lt;/p&gt;
+		</comment>
+	</comments>
+	<attachments>
+		<attachment id="118557" name="2024-06-07_09-40-03.mp4" size="3957450" author="justin.darding" created="Fri, 7 Jun 2024 09:41:27 -0400"/>
+		<attachment id="118217" name="Engage AI (7) 1.mp4" size="941003" author="62fbd784eec8d4a478d419e3" created="Wed, 29 May 2024 04:33:47 -0400"/>
+	</attachments>
+	<subtasks>
+	</subtasks>
+	<customfields>
+		<customfield id="customfield_11844" key="com.atlassian.jira.toolkit:message">
+			<customfieldname>- Description</customfieldname>
+			<customfieldvalues>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_10300" key="com.atlassian.servicedesk.approvals-plugin:sd-approvals">
+			<customfieldname>Approvals</customfieldname>
+			<customfieldvalues>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11302" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
+			<customfieldname>Asset Status</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue key="10500"><![CDATA[In Use]]></customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11012" key="com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker">
+			<customfieldname>CAB</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue><![CDATA[lightwell.admin]]></customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11010" key="com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker">
+			<customfieldname>Change managers</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue><![CDATA[lightwell.admin]]></customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11758" key="com.atlassian.jira.toolkit:participants">
+			<customfieldname>Current Status</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue>ug:0b17aaa7-2626-45c4-a6be-1d663b876a91</customfieldvalue>
+				<customfieldvalue>david.kane</customfieldvalue>
+				<customfieldvalue>ug:3732ba80-2dfa-4019-bfa0-948762ee7d3e</customfieldvalue>
+				<customfieldvalue>justin.darding</customfieldvalue>
+				<customfieldvalue>62fbd784eec8d4a478d419e3</customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11834" key="com.atlassian.jira.plugin.system.customfieldtypes:userpicker">
+			<customfieldname>Developer</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue>ug:3732ba80-2dfa-4019-bfa0-948762ee7d3e</customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_10600" key="com.atlassian.jira.plugins.jira-development-integration-plugin:devsummarycf">
+			<customfieldname>Development</customfieldname>
+			<customfieldvalues>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11400" key="com.atlassian.servicedesk:sd-customer-organizations">
+			<customfieldname>Organizations</customfieldname>
+			<customfieldvalues>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_10011" key="com.pyxis.greenhopper.jira:gh-lexo-rank">
+			<customfieldname>Rank</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue>1|i06su9:</customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11738" key="com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons">
+			<customfieldname>SAP License Required</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue key="10797"><![CDATA[No]]></customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_10006" key="com.pyxis.greenhopper.jira:gh-sprint">
+			<customfieldname>Sprint</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue id="768">NDM Sprint 19</customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11761" key="com.atlassian.jira.plugin.system.customfieldtypes:datepicker">
+			<customfieldname>Start date</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue>Fri, 31 May 2024 00:00:00 +0000</customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11933" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
+			<customfieldname>Type of Request</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue key="11290"><![CDATA[General]]></customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11732" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
+			<customfieldname>Urgency - B2B</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue key="10787"><![CDATA[Minor Issue]]></customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_11787" key="com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons">
+			<customfieldname>Workaround</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue key="10883"><![CDATA[No]]></customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+		<customfield id="customfield_10001" key="com.atlassian.jira.ext.charting:firstresponsedate">
+			<customfieldname>[CHART] Date of First Response</customfieldname>
+			<customfieldvalues>
+				<customfieldvalue>Thu, 6 Jun 2024 10:26:09 +0000</customfieldvalue>
+
+			</customfieldvalues>
+		</customfield>
+	</customfields>
+</item>
